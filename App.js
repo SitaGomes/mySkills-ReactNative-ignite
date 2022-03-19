@@ -17,6 +17,11 @@ export default function App() {
     setSkill("")
   }
 
+  function handleDeleteSkill(skillIndex) {
+    const newSkills = mySkills.filter((value, index) => index != skillIndex)
+    setMySkills(newSkills)
+  }
+
   return(
     <View style={styles.container}>
       <Text style={styles.title}>
@@ -54,9 +59,21 @@ export default function App() {
             activeOpacity={.7}
             style={styles.buttonSkill}
           >
-            <Text style={styles.textSkill}>
+
+            <Text style={[styles.textSkill, {flex: 1.2}]}>
               {skill}
             </Text>
+          
+            <TouchableOpacity
+              onPress={() => handleDeleteSkill(index)}
+              activeOpacity={.7}
+              style={{flex: 1}}
+            >
+              <Text style={styles.deleteSkill}>
+                DELL
+              </Text>
+            </TouchableOpacity>
+
           </TouchableOpacity>
         ))}
       </View>
@@ -98,14 +115,21 @@ const styles = StyleSheet.create({
   },
   buttonSkill: {
     backgroundColor: '#222',
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
     marginVertical: 10,
     padding: 15,
     borderRadius: 50,
-    alignItems: 'center',
+    flexDirection: 'row-reverse',
   },
   textSkill: { 
     color: '#EEE',
     fontWeight: 'bold',
     fontSize: 20,
+  },
+  deleteSkill: {
+    fontWeight: 'bold',
+    color: "#F8A"
   }
 })
+
